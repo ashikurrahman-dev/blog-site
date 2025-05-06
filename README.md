@@ -37,8 +37,8 @@ A simple yet powerful blog application built with **Laravel**, featuring user au
 ### Steps
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/laravel-blog.git
-   cd laravel-blog
+   git clone https://github.com/ashikurrahman-dev/blog-site.git
+   cd blog-site
 2. **Install dependencies**:
    ```bash
     composer install
