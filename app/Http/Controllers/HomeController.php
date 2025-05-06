@@ -17,4 +17,8 @@ class HomeController extends Controller
         ->get();
         return view('home', compact('categories', 'posts'));
     }
+
+    public function show(Post $post){
+        return view("post", compact("post"));
+    }
 }
