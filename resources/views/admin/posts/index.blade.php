@@ -64,6 +64,10 @@
                                                 class="text-indigo-600 hover:text-indigo-900 font-medium transition">
                                                 Edit
                                             </a>
+                                            <a href="{{ route('posts.show', $post) }}"
+                                                class="text-indigo-600 hover:text-indigo-900 font-medium transition">
+                                                Show
+                                            </a>
                                             <form method="post" action="{{ route('posts.destroy', $post) }}">
                                                 @csrf
                                                 @method('DELETE')
