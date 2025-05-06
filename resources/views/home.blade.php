@@ -1,6 +1,10 @@
-@extends('layouts.blog')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('All Post') }}
+        </h2>
+    </x-slot>
 
-@section('content')
     <main class="container mx-auto mt-6 flex gap-6">
         <!-- Blog Posts Section -->
         <section class="w-3/4 bg-white p-6 shadow-md rounded-lg">
@@ -37,4 +41,5 @@
             </ul>
         </aside>
     </main>
-@endsection
+</x-app-layout>
+

@@ -28,14 +28,15 @@ Route::middleware('auth')->group(function () {
         ->middleware(IsAdminMiddleware::class);
     Route::resource('posts', PostController::class)
         ->middleware(IsAdminMiddleware::class);
+        
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/post/{post}', [HomeController::class, 'show'])->name('post.show');
+
+    Route::view('/contact', 'contact')->name('contact');
+    Route::view('/about', 'about')->name('about');
 });
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/post/{post}', [HomeController::class, 'show'])->name('post.show');
-
-Route::view('/contact', 'contact')->name('contact');
-Route::view('/about', 'about')->name('about');
 
 // Route::abort();
 require __DIR__ . '/auth.php';
