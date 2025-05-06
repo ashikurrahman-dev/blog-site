@@ -24,10 +24,10 @@ Route::middleware('auth')->group(function () {
         return view('admin.dashboard');
     })->middleware(['verified'])->name('dashboard');
 
-    Route::resource('categories', CategoryController::class)
-        ->middleware(IsAdminMiddleware::class);
-    Route::resource('posts', PostController::class)
-        ->middleware(IsAdminMiddleware::class);
+    Route::middleware(IsAdminMiddleware::class)->group(function () {
+        Route::resource('categories', CategoryController::class);
+        Route::resource('posts', PostController::class);
+    });
         
     Route::get('/home/{category_id?}', [HomeController::class, 'index'])->name('home');
     Route::get('/post/{post}', [HomeController::class, 'show'])->name('post.show');
