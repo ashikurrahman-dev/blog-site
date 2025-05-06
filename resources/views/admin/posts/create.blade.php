@@ -10,10 +10,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <form action="{{ route('posts.store') }}" method="POST">
+                    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                        <!-- Name Field -->
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium text-gray-700">Post Title</label>
                             <input type="text" name="title" id="title"
@@ -35,8 +34,17 @@
                             @enderror
                         </div>
                         <div class="mb-4">
+                            <label for="img" class="block text-sm font-medium text-gray-700">Post Image</label>
+                            <input type="file" name="img" id="img"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                >
+                            @error('img')
+                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
                             <label for="text" class="block text-sm font-medium text-gray-700">Post Text</label>
-                            <textarea type="text" name="text" id="text" rows="20"
+                            <textarea type="text" name="text" id="text" rows="12"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 placeholder="Post text.."> </textarea>
                             @error('text')

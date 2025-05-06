@@ -29,6 +29,10 @@
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
+                                        Image
+                                    </th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                                         Text
                                     </th>
                                     <th scope="col"
@@ -45,6 +49,12 @@
                                         </td>
                                         <td class="px-6 py-4 text-gray-800">
                                             {{ $post->category->name }}
+                                        </td>
+                                        <td class="px-6 py-4 text-gray-800">
+                                            @if ($post->img)
+                                            <img src="{{ asset('storage/' . $post->img) }}" alt="Image"
+                                            class="w-24 h-24 object-cover rounded border border-gray-200 shadow-sm">
+                                            @endif
                                         </td>
                                         <td class="px-6 py-4 text-gray-800">
                                             {{ substr($post->text, 0, 200) }}

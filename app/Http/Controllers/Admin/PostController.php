@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -33,8 +34,13 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        // dd($request->all());
-        Post::create($request->validated());
+        $data = $request->validated();
+
+        if($request->hasFile('img')){
+            $imgPath = $request->file('img')->store('posts', 'public');
+            $data['img'] = $imgPath;
+        }
+        Post::create($data);
         return redirect()->route("posts.index");
     }
 
@@ -60,7 +66,17 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $post->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('img')) {
+            if ($post->img && Storage::disk('public')->exists($post->img)) {
+                Storage::disk('public')->delete($post->img);
+            }
+    
+            $data['img'] = $request->file('img')->store('posts', 'public');
+        }
+
+        $post->update($data);
         return redirect()->route('posts.index');
     }
 
@@ -69,6 +85,10 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if ($post->img && Storage::disk('public')->exists($post->img)) {
+            Storage::disk('public')->delete($post->img);
+        }
+        
         $post->delete();
         return redirect()->route('posts.index');
     }

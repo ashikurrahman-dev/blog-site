@@ -10,26 +10,16 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <form action="{{ route('posts.update', $post) }}" method="POST">
+                    <form action="{{ route('posts.update', $post) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
-                        <!-- Name Field -->
                         <div class="mb-4">
                             <label for="title" class="block text-sm font-medium text-gray-700">Post Title</label>
                             <input type="text" name="title" id="title"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 value="{{ old('title', $post->title ?? '') }}" required>
                             @error('title')
-                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div class="mb-4">
-                            <label for="text" class="block text-sm font-medium text-gray-700">Post Title</label>
-                            <input type="text" name="text" id="text"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                value="{{ old('text', $post->text ?? '') }}" required>
-                            @error('text')
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
@@ -44,6 +34,33 @@
                                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
+                        <div class="mb-4">
+                            <label for="img" class="block text-sm font-medium text-gray-700">Post Image</label>
+                            <input type="file" name="img" id="img"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    
+                            @error('img')
+                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                    
+                            @if ($post->img)
+                                <div class="mt-4">
+                                    <p class="text-sm text-gray-600 mb-1">Current Image:</p>
+                                    <img src="{{ asset('storage/' . $post->img) }}" alt="Current Image"
+                                         class="w-32 h-32 object-cover rounded border border-gray-200 shadow-sm">
+                                </div>
+                            @endif
+                        </div>
+                        <div class="mb-4">
+                            <label for="text" class="block text-sm font-medium text-gray-700">Post Title</label>
+                            <input type="text" name="text" id="text"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                value="{{ old('text', $post->text ?? '') }}" required>
+                            @error('text')
+                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        
 
                         <!-- Buttons -->
                         <div class="flex justify-around items-center mt-6">

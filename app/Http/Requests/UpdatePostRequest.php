@@ -26,6 +26,7 @@ class UpdatePostRequest extends FormRequest
             'title' => ['required', 'string', Rule::unique('posts')->ignore($this->post->id)],
             'text'=> ['required',],
             'category_id'=> ['required'],
+            'img' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048']
         ];
     }
 }
